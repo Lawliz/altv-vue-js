@@ -191,4 +191,3 @@ dictateurfou (https://github.com/dictateurfou)
 # Thanks
 
 Special thanks to Vue for everything
-
