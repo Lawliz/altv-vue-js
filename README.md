@@ -37,6 +37,14 @@ The only configuration you've to do is simply change the **`outputDir`** in **`v
 outputDir: join(__dirname, "../your/path")
 ```
 
+You can also change the `port` in `devServer`
+```js
+devServer: {
+    port: 2516516123,
+    open: true
+}
+```
+
 ### Create an application
 
 First create a **.vue** file in `views` directory and put the default Vue template in it
@@ -164,6 +172,8 @@ const UI = (isDebug) ? new View('http://127.0.0.1:8080') : new View('http://reso
 
 export default UI
 ```
+
+If you change to port in `vue.config.js` don't forget to update it in `new View(127.0.0.1:8080)`
 
 Or you're free to create your own WebView.
 
