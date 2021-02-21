@@ -16,12 +16,6 @@ if ('alt' in window) {
         Controller.loadApp(appName, params)
     })
 
-    alt.on('webview:LoadAppSync', async (appName, params) => {
-        Controller.loadApp(appName, params).then(() => {
-            alt.emit('webview:AppLoaded', appName)
-        })
-    })
-
     alt.on('webview:DestroyApp', (appName) => {
         Controller.destroyApp(appName)
     })

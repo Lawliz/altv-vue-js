@@ -1,6 +1,6 @@
 # Alt:V VueJS
 
-Alt:V VueTS is available at: 
+Alt:V VueTS is available at: *coming soon*
 
 ## What Alt:V Vue is?
 
@@ -40,7 +40,7 @@ outputDir: join(__dirname, "../your/path")
 You can also change the `port` in `devServer`
 ```js
 devServer: {
-    port: 2516516123,
+    port: 25565,
     open: true
 }
 ```
@@ -116,9 +116,11 @@ class View extends WebView {
         on("webview:LoadApp", this.loadApp.bind(this))
         on("webview:DestroyApp", this.destroyApp.bind(this))
         on("webview:CallEvent", this.callEvent.bind(this))
+        on("webview:ChangePage", this.changePage.bind(this))
         onServer("webview:LoadApp", this.loadApp.bind(this))
         onServer("webview:DestroyApp", this.destroyApp.bind(this))
         onServer("webview:CallEvent", this.callEvent.bind(this))
+        onServer("webview:ChangePage", this.changePage.bind(this))
 
         this.on("load", () => {
             emit("webview:Loaded")
@@ -160,6 +162,15 @@ class View extends WebView {
     }
 
     /**
+     * @param { string } appName
+     * @param { string } pageName
+     * @param { any } params
+     */
+    changePage (appName, pageName, params) {
+        super.emit("webview:ChangePage", appName, pageName, params)
+    }
+
+    /**
      * @param { string } eventName
      * @param { any[] } args
      */
@@ -183,15 +194,22 @@ After creating this, in your client files you can simply do this:
 ```js
 import UI from './path/to/viewclass/'
 
-// appName is a string & params is an empty object {}
-// Don't forget params is optional so you don't need to pass it
+// appName is a string and params is an empty object {}
+// Don't forget params and args is optional so you don't need to pass it
 UI.loadApp(appName, params)
 UI.destroyApp(appName)
 UI.changePage(appName, pageName, params)
-
+UI.callEvent(eventName, ...args)
 ```
 
 ## Handle events in vue from alt
+
+Sending event to your vue from client side
+```js
+UI.callEvent(eventName, ...args)
+// WebView is an instance of alt.Webview
+WebView.emit("webview:CallEvent", eventName, ...args)
+```
 
 In your `.vue` file you'll have to add the `mounted()` and `beforeUnmount()` functions
 
@@ -244,11 +262,56 @@ export default {
 
 Thoses events are called by `UI.callEvent(eventName, ...args)` or `WebView.emit("webview:CallEvent", eventName, ...args)`
 
+## How to change page
+
+To change a page you can process by different methods.
+
+First is just from your client calling the changePage method or event
+```js
+UI.changePage(appName, pageName, params)
+// WebView is an instance of alt.Webview
+WebView.emit("webview:ChangePage", appName, pageName, params)
+```
+
+Second is calling it directly by using the AppController in Vue
+```html
+<template>
+    <div>
+    </div>
+</template>
+
+<script>
+export default {
+    methods: {
+        clickOnButton () {
+            this.$controller.changePage(this.appName, pageName, params)
+        }
+    }
+}
+</script>
+```
+*appName is bind on this.appName*
+
+## Destroy an application
+
+To destroy an application it's the same as doing a changePage, you can do it in client side
+```js
+UI.destroyApp(appName)
+// WebView is an instance of alt.Webview
+WebView.emit("webview:DestroyApp", appName)
+```
+
 ## Vue Store
 
 You can use the Vue Store like a normal use
 
 See https://vuex.vuejs.org/guide/ for more info
+
+## Issues
+
+If you had any issues with this, feel free to open an issue in this repository
+
+Please don't DM authors on Discord for this
 
 # Authors
 
