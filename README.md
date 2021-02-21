@@ -184,6 +184,8 @@ const UI = (isDebug) ? new View('http://127.0.0.1:8080') : new View('http://reso
 export default UI
 ```
 
+Don't forgot to import the file or your webview will not be created.
+
 If you change to port in `vue.config.js` don't forget to update it in `new View(127.0.0.1:8080)`
 
 Or you're free to create your own WebView.
