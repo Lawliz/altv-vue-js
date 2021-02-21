@@ -191,6 +191,59 @@ UI.changePage(appName, pageName, params)
 
 ```
 
+## Handle events in vue from alt
+
+In your `.vue` file you'll have to add the `mounted()` and `beforeUnmount()` functions
+
+After this call the Event Manager with `this.$event.on()` and `this.$event.off()` methods
+
+*example:*
+```html
+<template>
+    <div>
+    </div>
+</template>
+
+<script>
+export default {
+    mounted () {
+        this.$event.on(eventName, (...args) => {
+            // code goes here
+        })
+    },
+    beforeUnmount () {
+        this.$event.off(eventName)
+    }
+}
+</script>
+```
+
+You can also call vue methods:
+```html
+<template>
+    <div>
+    </div>
+</template>
+
+<script>
+export default {
+    methods: {
+        myMethod (...args) {
+            // code goes here
+        }
+    },
+    mounted () {
+        this.$event.on(eventName, this.myMethod)
+    },
+    beforeUnmount () {
+        this.$event.off(eventName)
+    }
+}
+</script>
+```
+
+Thoses events are called by `UI.callEvent(eventName, ...args)` or `WebView.emit("webview:CallEvent", eventName, ...args)`
+
 ## Vue Store
 
 You can use the Vue Store like a normal use
