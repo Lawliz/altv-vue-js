@@ -20,7 +20,7 @@ export default class AppController {
 
         alreadyExist.forEach(el => {
             if (el.id === appName) {
-                this.app[appName].vm.unmount('#' + appName)
+                this.app[appName].unmount('#' + appName)
                 el.remove()
             }
         })
