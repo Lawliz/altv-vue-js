@@ -53,7 +53,9 @@ export default {
 }
 </script>
 ```
+
 Second go to `router/index.js` and create a router for your application and set the key to **home**
+
 If you don't set the key to **home** the app will never be created when called.
 ```js
 import HomeApplicationName from '../views/applicationName/Home.vue'
@@ -164,6 +166,7 @@ export default UI
 ```
 
 Or you're free to create your own WebView.
+
 If you choose to create your own WebView make sure to call the event present in this file when you want to use Alt:V Vue
 
 After creating this, in your client files you can simply do this:
@@ -181,13 +184,16 @@ UI.changePage(appName, pageName, params)
 ## Vue Store
 
 You can use the Vue Store like a normal use
+
 See https://vuex.vuejs.org/guide/ for more info
 
 # Authors
 
 Lawliz (http://github.com/Lawliz)
+
 dictateurfou (https://github.com/dictateurfou)
 
 # Thanks
 
 Special thanks to Vue for everything
+
