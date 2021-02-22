@@ -1,6 +1,6 @@
 # Alt:V VueJS
 
-Alt:V VueTS is available at: *coming soon*
+Alt:V VueTS is available at: https://github.com/Lawliz/altv-vue-ts
 
 ## What Alt:V Vue is?
 
