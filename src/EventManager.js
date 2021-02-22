@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 export default class EventManager {
     eventList = {}
 
@@ -11,5 +12,9 @@ export default class EventManager {
 
     off (eventName) {
         delete this.eventList[eventName]
+    }
+
+    callGame (event, ...args) {
+        alt.emit("webview:CallGame", event, ...args)
     }
 }

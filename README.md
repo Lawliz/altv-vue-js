@@ -125,6 +125,15 @@ class View extends WebView {
         this.on("load", () => {
             emit("webview:Loaded")
             emitServer("webview:Loaded")
+
+            /**
+             * @param { type: "server"|"client", name: string } event
+             * @param { any[] } ...args
+             */
+            this.on("webview:CallGame", (event, ...args) => {
+                if (event.type === "server") emitServer(event.name, ...args)
+                else if (event.type === "client") emit(event.name, ...args)
+            })
         })
     }
 
@@ -263,6 +272,51 @@ export default {
 ```
 
 Thoses events are called by `UI.callEvent(eventName, ...args)` or `WebView.emit("webview:CallEvent", eventName, ...args)`
+
+## Emit event from vue to alt
+
+We've define a method in our EventManager who allow you to send directly an event to the server or the client
+
+We'll make an example with a simple click on a button
+```html
+<template>
+    <div>
+        <button @click="sendHelloToAlt">
+    </div>
+</template>
+
+<script>
+export default {
+    methods: {
+        sendHelloToAlt () {
+            this.$event.callGame({
+                type: "server"|"client",
+                name: string
+            }, "Hello Alt:V, I'm vue !")
+        }
+    }
+}
+</script>
+```
+
+By setting `server` or `client` in the type you'll choose your target.
+
+And in your server file:
+```ts
+// alt-client
+import { on } from 'alt-client'
+
+on(event.name, (args) => {
+    console.log(args)
+})
+
+// alt-server
+import { onClient } from 'alt-server'
+
+onClient(event.name, (player, args) => {
+    console.log(args)
+})
+```
 
 ## How to change page
 
