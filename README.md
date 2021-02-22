@@ -6,6 +6,8 @@ Alt:V VueTS is available at: *coming soon*
 
 Alt:V Vue is a kind of "framework" for creating views in Alt:V by using Vue (created with VueCLI)
 
+It also allow you to render multiple apps at the same time.
+
 ![](https://cdn.discordapp.com/attachments/288593185515503616/813178827508547594/unknown.png)
 
 ### How to use?
