@@ -5,8 +5,6 @@ import EventManagerClass from './EventManager'
 const EventManager = new EventManagerClass()
 const Controller = new AppControllerClass()
 
-Controller.loadApp("home")
-
 document.addEventListener('contextmenu', (e) => {
     e.preventDefault()
 }, false)
